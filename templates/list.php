@@ -1,8 +1,8 @@
 <!-- templates/list.php -->
-<?php $title = 'List of Posts' ?>
+<?php $title = 'Dernière notes' ?>
 
 <?php ob_start() ?>
-    <h1>List of Posts</h1>
+    <h1>Dernière notes</h1>
     <ul>
         <?php foreach ($notes as $post): ?>
         <li>

@@ -1,12 +1,12 @@
 <!-- templates/show.php -->
-<?php $title = $post['title'] ?>
+<?php $title = $note['title'] ?>
 
 <?php ob_start() ?>
-    <h1><?= $post['title'] ?></h1>
+    <h1><?= $note['title'] ?></h1>
 
-    <div class="date"><?= $post['created'] ?></div>
-    <div class="content">
-        <?= $post['content'] ?>
+    <div class="date"><?= $note['created'] ?></div>
+    <div class="content" id="content-editor">
+        <?= $note['content'] ?>
     </div>
 <?php $content = ob_get_clean() ?>
 
