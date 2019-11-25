@@ -1,31 +1,63 @@
 <?php
+/** controllers.php
+** Classe Controller
+** Author : Charles EDOU NZE : <charles AT charlesen DOT fr>
+** Description : Controleur simple pour la gestion des requetes HTTP
+**/
 
-// controllers.php
 use Symfony\Component\HttpFoundation\Response;
 
-function list_action()
+class Controller
 {
-    $notes = get_all_notes();
-    $html = render_template('templates/list.php', ['notes' => $notes]);
+    /**
+     * Instance du modèle
+     * @var object
+     */
+    private $model;
 
-    return new Response($html);
-}
+    public function __construct()
+    {
+        // Inclusion du modèle
+        $this->$model = new Model;
+    }
 
-function show_action($id)
-{
-    $note = get_notes_by_id($id);
-    $html = render_template('templates/show.php', ['note' => $note]);
+    /**
+    ** Affichage du plateau de départ
+    **/
+    public function show_board()
+    {
+        // Plateau de départ : on récupère les cartes mélangées
+        $card = new Card;
+        $cards = $card->get_cards();
+        $board_rows = $card->get_rows();
+        $board_cols = $card->get_cols();
 
-    return new Response($html);
-}
+        // Récupération de tous les scores
+        $scores = $this->$model->get_all_scores();
 
-// helper function to render templates
-function render_template($path, array $args)
-{
-    extract($args);
-    ob_start();
-    require $path;
-    $html = ob_get_clean();
+        $params = ['cards' => $cards, 'scores' => $scores,
+                   'rows' => $board_rows, 'cols' => $board_cols];
+        $html = $this->render_template('templates/board.php', $params);
 
-    return $html;
+        return new Response($html);
+    }
+
+    public function show_score($id)
+    {
+        $score = $this->$model->get_scores_by_id($id);
+        $html = $this->render_template('templates/score.php', ['score' => $score]);
+
+        return new Response($html);
+    }
+
+    // helper function to render templates
+    public function render_template($path, array $args)
+    {
+        extract($args);
+        ob_start();
+        require $path;
+        $html = ob_get_clean();
+
+        return $html;
+    }
 }

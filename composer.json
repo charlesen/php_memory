@@ -3,6 +3,6 @@
         "symfony/http-foundation": "^4.0"
     },
     "autoload": {
-        "files": ["model.php","controllers.php"]
+        "files": ["card.php", "model.php","controllers.php"]
     }
 }
