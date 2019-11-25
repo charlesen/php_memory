@@ -26,7 +26,6 @@ $(document).ready(function() {
     timer_count += 1;
 
     if (timer_count >= timeout) {
-      console.log('Fin du jeu');
       // Fin du jeu
       resetGame();
 
@@ -59,7 +58,7 @@ $(document).ready(function() {
         // Paire non valide : on remet l'image par défaut sur celles qui ont été sélectionnée
         setTimeout(function() {
           $(`img.card_clicked`).attr('src', '/static/img/card.jpg');
-        }, 800);
+        }, 500);
 
       } else {
         // Pair valide : les photos réélles restes affichées. On retire également le
