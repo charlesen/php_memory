@@ -3,7 +3,7 @@
 ## Jeu de mémoire
 Le principe du jeu est relativement simple : Cliquer sur une carte et trouver son double.
 
-Si double trouvé, on a une paire valide. Sinon, vous n'avez plus qu'à recommencer.
+Si une paire est trouvée, c'est validé. Sinon, vous n'avez plus qu'à recommencer.
 Si vous réussissez à valider toutes les paires dans le temps imparti, vous avez remporté la partie.
 
 Chaque partie dure 5 min (300 secondes).

@@ -26,7 +26,7 @@
           <span class="">Cliquer sur une carte et trouver son double.</span>
         </p>
         <p>
-        Si double trouvé, on a une paire valide. Sinon, vous n'avez plus qu'à recommencer. <br />
+        Si une paire est trouvée, c'est validé. Sinon, vous n'avez plus qu'à recommencer. <br />
         Si vous réussisez à valider toutes les paires dans le temps imparti, vous avez remporté la partie.
         </p>
         </div>
