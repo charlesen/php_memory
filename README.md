@@ -69,4 +69,4 @@ $response->send();
 
 ```
 
-Son rôle est de décortiquer l'url saisir dans la barre d'adresse de votre navigateur et en fonction de sa valeur vous retourne
+Son rôle est de décortiquer l'url saisie dans la barre d'adresse de votre navigateur et en fonction de sa valeur vous retourne la page ou le contenu demandé (VUE).
