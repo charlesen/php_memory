@@ -21,6 +21,7 @@ $request = Request::createFromGlobals();
 // saisi dans le navigateur
 $controller = new Controller;
 
+// Recupère l'URL du navigateur
 $uri = $request->getPathInfo();
 if ('/' === $uri) {
     $response = $controller->show_board();

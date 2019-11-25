@@ -26,9 +26,9 @@ des requêtes (demandes) http pour qu'elles soient traitées par un seul gestion
 en séparant ce que l'on affiche, de ce que l'on souhaite afficher.
 
 Dans ce modèle chaque URL est associée (à priori) à une action écrite dans le contrôleur (fichier controllers.php. Pensez au contrôleur SNCF, qui vérifie que vous avez le bon ticket de voyahe)
-Ex : http://memory.charlesen.fr/doc ==> méthode show_doc() du controleur (fichier controllers.php)
+Ex : http://memory.charlesen.fr/doc ==> méthode show_doc() du contrôleur (fichier controllers.php)
 
-Pour les besoins de notre projet, nous avons besoin uniquement d'effectuer 2 requete : l'affichage du plateau + la documentation.
+Pour les besoins de notre projet, nous avons besoin uniquement d'effectuer 2 requête : l'affichage du plateau + la documentation.
 
 ### SQLite
 Pour les besoins du projet, nous utilisons SQLite (db.sqlite), qui permet la sauvegarde de données sur un fichier local.
@@ -43,5 +43,29 @@ Dans ce projet, toutes les requêtes HTTP sont traitées par notre fichier index
 $request = Request::createFromGlobals();
 ```
 
-On créé ensuite une instance de notre con
+On créé ensuite une instance de notre contrôleur, qui se chargera d'associer notre url à une action particulière. Sinon renvoie une erreur 404 si aucune action existante
+```php
+
+// On instancie notre contrôleur qui lancer des actions à partir de l'URL
+// saisi dans le navigateur
+$controller = new Controller;
+
+// Recupère l'URL du navigateur
+$uri = $request->getPathInfo();
+if ('/' === $uri) {
+    $response = $controller->show_board();
+} elseif ('/save_score' === $uri && $request->request->get('score')) {
+    $response = $controller->save_score($request->request->get('score'));
+} elseif ('/doc' === $uri) {
+    $response = $controller->show_doc();
+} else {
+    $html = '<html><body><h1>Page introuvable</h1></body></html>';
+    $response = new Response($html, Response::HTTP_NOT_FOUND);
+}
+
+// Renvoie la réponse au navigateur
+$response->send();
+
+```
+
 Son rôle est de décortiquer l'url saisir dans la barre d'adresse de votre navigateur et en fonction de sa valeur vous retourne
