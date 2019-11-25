@@ -16,4 +16,32 @@ $ composer install
 Le principe du jeu est relativement simple : Cliquer sur une carte et trouver son double.
 
 Si double trouvé, on a une paire valide. Sinon, vous n'avez plus qu'à recommencer.
-Si vous réussisez à valider toutes les paires dans le temps imparti, vous avez remporté la partie.
+Si vous réussissez à valider toutes les paires dans le temps imparti, vous avez remporté la partie.
+
+
+## Architecture du projet
+### MVC + Front-Controller
+Ce projet utilise Les Patterns (modèle de conception) "Front controller" qui, est utilisé pour fournir un mécanisme centralisé de traitement
+des requêtes (demandes) http pour qu'elles soient traitées par un seul gestionnaire, et MVC (Modèle - Vue - Controlleur) qui permet d'organiser son code
+en séparant ce que l'on affiche, de ce que l'on souhaite afficher.
+
+Dans ce modèle chaque URL est associée (à priori) à une action écrite dans le contrôleur (fichier controllers.php. Pensez au contrôleur SNCF, qui vérifie que vous avez le bon ticket de voyahe)
+Ex : http://memory.charlesen.fr/doc ==> méthode show_doc() du controleur (fichier controllers.php)
+
+Pour les besoins de notre projet, nous avons besoin uniquement d'effectuer 2 requete : l'affichage du plateau + la documentation.
+
+### SQLite
+Pour les besoins du projet, nous utilisons SQLite (db.sqlite), qui permet la sauvegarde de données sur un fichier local.
+
+
+### Code source
+HTTP (Hypertext Transfer Protocol) est un langage texte qui permet à deux machines (comme un ordinateur) de communiquer entre elles.
+Chaque fois que vous ouvrez votre navigateur préféré (Chrome je suppose ?) et saisissez une url comme google.fr, vous effectuez une requete HTTP.
+
+Dans ce projet, toutes les requêtes HTTP sont traitées par notre fichier index.php (front controller) grâce la classe Request de symfony.
+```php
+$request = Request::createFromGlobals();
+```
+
+On créé ensuite une instance de notre con
+Son rôle est de décortiquer l'url saisir dans la barre d'adresse de votre navigateur et en fonction de sa valeur vous retourne
