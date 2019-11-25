@@ -62,9 +62,10 @@ class Card
     /**
     ** Retourne le nombre de lignes du plateau
     **/
-    function get_rows(){
-			return $this->rows;
-		}
+    public function get_rows()
+    {
+        return $this->rows;
+    }
 
     /**
     ** Retourne le nombre de colonnes du plateau

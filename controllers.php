@@ -6,6 +6,7 @@
 **/
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class Controller
 {
@@ -18,7 +19,7 @@ class Controller
     public function __construct()
     {
         // Inclusion du modèle
-        $this->$model = new Model;
+        $this->model = new Model;
     }
 
     /**
@@ -33,24 +34,38 @@ class Controller
         $board_cols = $card->get_cols();
 
         // Récupération de tous les scores
-        $scores = $this->$model->get_all_scores();
+        $scores = $this->model->get_all_scores();
 
-        $params = ['cards' => $cards, 'scores' => $scores,
-                   'rows' => $board_rows, 'cols' => $board_cols];
+        $params = ['cards' => $cards, 'scores' => $scores];
         $html = $this->render_template('templates/board.php', $params);
 
         return new Response($html);
     }
 
-    public function show_score($id)
-    {
-        $score = $this->$model->get_scores_by_id($id);
-        $html = $this->render_template('templates/score.php', ['score' => $score]);
 
+
+    /**
+    ** Affichage de la documentation
+    **/
+    public function show_doc()
+    {
+        $html = $this->render_template('templates/doc.php', array());
         return new Response($html);
     }
 
-    // helper function to render templates
+    /**
+    ** Sauvegarde du score après chaque partie à partir du modèle
+    ** cf. model.php
+    **/
+    public function save_score($score)
+    {
+        $result = $this->model->save_score($score);
+        return new JsonResponse($score);
+    }
+
+    /**
+    ** Helper pour le rendu html
+    **/
     public function render_template($path, array $args)
     {
         extract($args);

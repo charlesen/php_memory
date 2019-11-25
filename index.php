@@ -19,13 +19,15 @@ $request = Request::createFromGlobals();
 
 // On instancie notre controleur qui lancer des actions à partir de l'URL
 // saisi dans le navigateur
-$controller = new Controller($cards);
+$controller = new Controller;
 
 $uri = $request->getPathInfo();
 if ('/' === $uri) {
     $response = $controller->show_board();
-} elseif ('/score' === $uri && $request->query->has('id')) {
-    $response = $controller->show_score($request->query->get('id'));
+} elseif ('/save_score' === $uri && $request->request->get('score')) {
+    $response = $controller->save_score($request->request->get('score'));
+} elseif ('/doc' === $uri) {
+    $response = $controller->show_doc();
 } else {
     $html = '<html><body><h1>Page introuvable</h1></body></html>';
     $response = new Response($html, Response::HTTP_NOT_FOUND);

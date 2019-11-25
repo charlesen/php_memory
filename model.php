@@ -1,12 +1,4 @@
 <?php
-// Doc : http://www.finalclap.com/faq/170-php-sqlite-pdo
-// Remplissage de données
-// $stmt = $pdo->prepare("INSERT INTO scores (title, content, created) VALUES (:title, :content, :created)");
-// $result = $stmt->execute(array(
-//     'title'         => "Liste de course",
-//     'content'         => "Café soluble (Nescafé ?)",
-//     'created'       => date("Y-m-d H:i:s")
-// ));
 
 /** model.php
 ** Classe Model
@@ -45,7 +37,7 @@ class Model
     {
         $connection = $this->open_database_connection();
 
-        $result = $connection->query('SELECT id, title, content FROM scores');
+        $result = $connection->query('SELECT score FROM scores order by score DESC LIMIT 5');
 
         $scores = [];
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
@@ -57,11 +49,25 @@ class Model
     }
 
 
+    public function save_score($score)
+    {
+        $connection = $this->open_database_connection();
+        $query = "INSERT INTO scores (score, created) VALUES (:score, :created)";
+        $data = [
+            'score' => $score,
+            'created' => date("Y-m-d H:i:s")
+        ];
+        $statement = $connection->prepare($query);
+        $statement->execute($data);
+        $this->close_database_connection($connection);
+    }
+
+
     public function get_scores_by_id($id)
     {
         $connection = $this->open_database_connection();
 
-        $query = 'SELECT created, title, content FROM scores WHERE id=:id';
+        $query = 'SELECT created, score FROM scores WHERE id=:id';
         $statement = $connection->prepare($query);
         $statement->bindValue(':id', $id, PDO::PARAM_INT);
         $statement->execute();
