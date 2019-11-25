@@ -61,7 +61,7 @@ class Model
     }
 
     /**
-    ** Récupération de tous les scores en les ordannant par score, du plus grand au plus petit.
+    ** Récupération de tous les scores en les ordannant par score, du plus petit au plus grand.
     **/
     public function get_all_scores()
     {
