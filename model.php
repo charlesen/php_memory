@@ -66,7 +66,7 @@ class Model
     public function get_all_scores()
     {
         $connection = $this->open_database_connection();
-        $result = $connection->query('SELECT score FROM scores order by score ASC LIMIT 5');
+        $result = $connection->query('SELECT score FROM scores order by cast(score as unsigned) ASC LIMIT 5');
 
         $scores = [];
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
