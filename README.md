@@ -1,5 +1,12 @@
 # Memory en PHP
 
+## Jeu de mémoire
+Le principe du jeu est relativement simple : Cliquer sur une carte et trouver son double.
+
+Si double trouvé, on a une paire valide. Sinon, vous n'avez plus qu'à recommencer.
+Si vous réussissez à valider toutes les paires dans le temps imparti, vous avez remporté la partie.
+
+
 ## Installation
 
 Memory est un projet permettant la mise en place du jeu du même nom, en PHP.
@@ -11,12 +18,6 @@ La première étape consiste donc à installer notre package Symfony (Voir fichi
 ```bash
 $ composer install
 ```
-
-## Jeu de mémoire
-Le principe du jeu est relativement simple : Cliquer sur une carte et trouver son double.
-
-Si double trouvé, on a une paire valide. Sinon, vous n'avez plus qu'à recommencer.
-Si vous réussissez à valider toutes les paires dans le temps imparti, vous avez remporté la partie.
 
 
 ## Architecture du projet
